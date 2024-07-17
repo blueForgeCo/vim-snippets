@@ -1,0 +1,63 @@
+snippet obj "uvm_object"
+class ${1:name} extends ${2:uvm_object};
+
+	\`uvm_object_utils($1)
+	function new(string name = "$1");
+		super.new(name);
+	endfunction
+
+	${0}
+
+endclass
+endsnippet
+
+snippet seq "uvm_sequence"
+class ${1:name} extends ${2:uvm_sequence};
+
+	\`uvm_object_utils($1)
+	function new(string name = "$1");
+		super.new(name);
+	endfunction
+
+	task body();
+		${0}
+	endtask
+
+endclass
+endsnippet
+
+snippet comp "uvm_component"
+class ${1:name} extends ${2:uvm_component};
+
+	\`uvm_component_utils($1)
+	function new(string name = "$1", uvm_component parent = null);
+		super.new(name, parent);
+	endfunction
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		${0}
+	endfunction
+
+	function void connect_phase(uvm_phase phase);
+		super.connect_phase(phase);
+	endfunction
+
+	task run_phase(uvm_phase phase);
+		super.connect_phase(phase);
+	endtask
+
+endclass
+endsnippet
+
+snippet endelab "end_of_elaboration_phase"
+function void end_of_elaboration_phase(uvm_phase phase);
+	super.end_of_elaboration_phase(phase);
+endfunction
+endsnippet
+
+snippet report "report_phase"
+function void report_phase(uvm_phase phase);
+	super.report_phase(phase);
+endfunction
+endsnippet
